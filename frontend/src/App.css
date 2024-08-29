@@ -1,0 +1,42 @@
+/* src/App.css */
+
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.main-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.app-footer {
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 14px;
+}
+
+.footer-content span {
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.footer-content span:hover {
+    color: #1890ff;
+}

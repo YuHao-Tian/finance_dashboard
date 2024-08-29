@@ -1,0 +1,40 @@
+/* src/components/Register.css */
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f2f5;
+}
+  
+.register-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+  
+.register-input {
+    font-size: 16px;
+    padding: 10px;
+}
+  
+.error-message {
+    color: red;
+    margin-bottom: 20px;
+}
+  
+.register-form-buttons {
+    display: flex;
+    gap: 20px; /* 增加按钮之间的间距 */
+    justify-content: space-between;
+}
+  
+.register-button, .back-button {
+    flex: 1; /* 确保按钮均匀分配可用空间 */
+    font-size: 16px;
+}
