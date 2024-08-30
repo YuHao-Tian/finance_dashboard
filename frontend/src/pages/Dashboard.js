@@ -6,7 +6,6 @@ import Chart from 'chart.js/auto';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import config  from '../config.js';
 
-
 const { Meta } = Card;
 
 const Dashboard = () => {
@@ -51,7 +50,6 @@ const Dashboard = () => {
   useEffect(() => {
     fetchStockNews(); // 组件挂载时获取新闻
   }, []);
-
 
   const fetchBasicFinancials = async (symbol) => {
     try {
@@ -308,196 +306,200 @@ const Dashboard = () => {
 
   return (
     <div style={{ maxWidth: '1200px', margin: 'auto', padding: '50px' }}>
-    <Row gutter={24} style={{ marginBottom: '20px' }}>
-      <Col span={18}>
-        <Input
-          placeholder="Search for a stock (e.g., AAPL)"
-          value={stockName}
-          onChange={(e) => setStockName(e.target.value)}
-          style={{ width: '100%' }}
-        />
-      </Col>
-      <Col span={6}>
-        <Button type="primary" onClick={handleSearch} loading={loading} style={{ width: '100%' }}>
-          Search
-        </Button>
-      </Col>
-    </Row>
-
-    {error && <div style={{ color: 'red', marginBottom: '20px' }}>{error}</div>}
-   
-         
-          {currentPrice !== null && (
-            
-          <>
-           <p style={{ fontSize: '20px', fontWeight: 'bold', marginTop: '20px' }}>
-  Current Price: ${currentPrice?.toFixed(2)}
-</p>
-            <Button
-        type="primary"
-        style={{
-          background: 'linear-gradient(45deg, #32cd32, #7cfc00)',
-          borderColor: '#32cd32',
-          color: '#fff',
-          fontWeight: 'bold',
-        }}
-        onClick={handleBuyClick}
-      >
-        Buy
-      </Button>
-      <Button
-        type="primary"
-        style={{
-          background: 'linear-gradient(45deg, #ff4500, #ff6347)',
-          borderColor: '#ff4500',
-          color: '#fff',
-          fontWeight: 'bold',
-          marginLeft: '10px', // Add some spacing between the buttons
-        }}
-        onClick={handleSellClick}
-      >
-        Sell
-      </Button>
-          </>
-        )}
-    {!stockName && news.length > 0 && (
-    <Row gutter={[24, 24]}>
-      {news.map((article, index) => (
-        <Col span={12} key={index}>
-          <Card
-            hoverable
-            cover={<img alt="news" src={article.image} style={{ height: '200px', objectFit: 'cover' }} />}
-            style={{ borderRadius: '8px', overflow: 'hidden', borderColor: '#e8e8e8' }}
-          >
-            <Meta
-              title={article.headline}
-              description={article.summary.length > 100 ? `${article.summary.slice(0, 100)}...` : article.summary}
-            />
-            <a href={article.url} target="_blank" rel="noopener noreferrer" style={{ display: 'block', marginTop: '10px', color: '#1890ff' }}>
-              Read more
-            </a>
-          </Card>
+      <Row gutter={24} style={{ marginBottom: '20px' }}>
+        <Col span={18}>
+          <Input
+            placeholder="Search for a stock (e.g., AAPL)"
+            value={stockName}
+            onChange={(e) => setStockName(e.target.value)}
+            style={{ width: '100%' }}
+          />
         </Col>
-      ))}
-    </Row>
-  )}
-    {chartData.labels.length > 0 && (
-      <Row gutter={24}>
-        <Col span={24}>
-          <Card title={`${stockName} Stock Trend`} style={{ marginBottom: '20px' }}>
-            <div style={{ width: '100%' }}>
-              <canvas id="acquisitions"></canvas>
-            </div>
-          </Card>
+        <Col span={6}>
+          <Button type="primary" onClick={handleSearch} loading={loading} style={{ width: '100%' }}>
+            Search
+          </Button>
         </Col>
       </Row>
-    )}
 
-    {recommendationTrends.length > 0 && (
-      <Row gutter={24}>
-        <Col span={24}>
-          <Card title={`${stockName} Recommendation Trends`} style={{ marginBottom: '20px' }}>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart
-                data={recommendationTrends.map(item => ({
-                  name: new Date(item.period).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
-                  strongBuy: item.strongBuy,
-                  buy: item.buy,
-                  hold: item.hold,
-                  sell: item.sell,
-                  strongSell: item.strongSell,
-                }))}
-                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+      {error && <div style={{ color: 'red', marginBottom: '20px' }}>{error}</div>}
+
+      {!stockName && news.length > 0 && (
+        <Row gutter={[24, 24]}>
+          {news.map((article, index) => (
+            <Col span={12} key={index}>
+              <Card
+                hoverable
+                cover={<img alt="news" src={article.image} style={{ height: '200px', objectFit: 'cover' }} />}
+                style={{ borderRadius: '8px', overflow: 'hidden', borderColor: '#e8e8e8' }}
               >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="strongBuy" stackId="a" fill="#00C49F" />
-                <Bar dataKey="buy" stackId="a" fill="#0088FE" />
-                <Bar dataKey="hold" stackId="a" fill="#FFBB28" />
-                <Bar dataKey="sell" stackId="a" fill="#FF8042" />
-                <Bar dataKey="strongSell" stackId="a" fill="#AA336A" />
-              </BarChart>
-            </ResponsiveContainer>
-          </Card>
-        </Col>
-      </Row>
-    )}
+                <Meta
+                  title={article.headline}
+                  description={article.summary.length > 100 ? `${article.summary.slice(0, 100)}...` : article.summary}
+                />
+                <a href={article.url} target="_blank" rel="noopener noreferrer" style={{ display: 'block', marginTop: '10px', color: '#1890ff' }}>
+                  Read more
+                </a>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
 
-    {companyInfo && (
-      <Row gutter={24}>
-        <Col span={24}>
-          <Card
-            title={companyInfo.name}
-            style={{ marginBottom: '20px' }}
-            cover={
-              <img
-                alt={`${companyInfo.name} logo`}
-                src={companyInfo.logo}
-                style={{ maxHeight: '150px', objectFit: 'contain', padding: '20px' }}
-              />
-            }
-          >
-            <Meta
-              description={(
-                <div>
-                  <p><strong>Country:</strong> {companyInfo.country}</p>
-                  <p><strong>Currency:</strong> {companyInfo.currency}</p>
-                  <p><strong>Exchange:</strong> {companyInfo.exchange}</p>
-                  <p><strong>Industry:</strong> {companyInfo.finnhubIndustry}</p>
-                  <p><strong>IPO Date:</strong> {companyInfo.ipo}</p>
-                  <p><strong>Market Capitalization:</strong> ${parseInt(companyInfo.marketCapitalization).toLocaleString()}</p>
-                  <p><strong>Outstanding Shares:</strong> {companyInfo.shareOutstanding}</p>
-                  <p><strong>Price to Earnings (P/E) Ratio:</strong> {basicFinancials.peBasicExclExtraTTM || 'N/A'}</p>
-                  <p><strong>52-Week High:</strong> ${basicFinancials['52WeekHigh'] || 'N/A'}</p>
-                  <p><strong>52-Week Low:</strong> ${basicFinancials['52WeekLow'] || 'N/A'}</p>
-                  <p><strong>Dividend Yield:</strong> {basicFinancials.dividendYieldIndicatedAnnual || 'N/A'}</p>
-                  <p><strong>Beta:</strong> {basicFinancials.beta || 'N/A'}</p>
-                  <p><strong>Ticker:</strong> {companyInfo.ticker}</p>
-                  <p><strong>Phone:</strong> {companyInfo.phone}</p>
-                  <p><strong>Website:</strong> <a href={companyInfo.weburl} target="_blank" rel="noopener noreferrer">{companyInfo.weburl}</a></p>
-                </div>
-              )}
-            />
-          </Card>
-        </Col>
-      </Row>
-    )}
+      {stockName && (
+        <>
+          {currentPrice !== null && (
+            <>
+              <p style={{ fontSize: '20px', fontWeight: 'bold', marginTop: '20px' }}>
+                Current Price: ${currentPrice?.toFixed(2)}
+              </p>
+              <Button
+                type="primary"
+                style={{
+                  background: 'linear-gradient(45deg, #32cd32, #7cfc00)',
+                  borderColor: '#32cd32',
+                  color: '#fff',
+                  fontWeight: 'bold',
+                }}
+                onClick={handleBuyClick}
+              >
+                Buy
+              </Button>
+              <Button
+                type="primary"
+                style={{
+                  background: 'linear-gradient(45deg, #ff4500, #ff6347)',
+                  borderColor: '#ff4500',
+                  color: '#fff',
+                  fontWeight: 'bold',
+                  marginLeft: '10px', // Add some spacing between the buttons
+                }}
+                onClick={handleSellClick}
+              >
+                Sell
+              </Button>
+            </>
+          )}
 
-    <Modal
-      title="Buy Stocks"
-      visible={isBuyModalVisible}
-      onOk={handleBuyModalOk}
-      onCancel={handleModalCancel}
-    >
-      <p>Current Price: ${currentPrice?.toFixed(2)}</p>
-      <p>Enter the number of shares you want to buy:</p>
-      <InputNumber
-        min={1}
-        defaultValue={1}
-        onChange={handleSharesChange}
-      />
-      <p>Total Price: ${(shares * currentPrice).toFixed(2)}</p>
-    </Modal>
+          {chartData.labels.length > 0 && (
+            <Row gutter={24}>
+              <Col span={24}>
+                <Card title={`${stockName} Stock Trend`} style={{ marginBottom: '20px' }}>
+                  <div style={{ width: '100%' }}>
+                    <canvas id="acquisitions"></canvas>
+                  </div>
+                </Card>
+              </Col>
+            </Row>
+          )}
 
-    <Modal
-      title="Sell Stocks"
-      visible={isModalVisible}
-      onOk={handleSellModalOk}
-      onCancel={handleModalCancel}
-    >
-      <p>Current Price: ${currentPrice?.toFixed(2)}</p>
-      <p>Enter the number of shares you want to Sell:</p>
-      <InputNumber
-        min={1}
-        defaultValue={1}
-        onChange={handleSharesChange}
-      />
-      <p>Total Price: ${(shares * currentPrice).toFixed(2)}</p>
-    </Modal>
-  </div>
+          {recommendationTrends.length > 0 && (
+            <Row gutter={24}>
+              <Col span={24}>
+                <Card title={`${stockName} Recommendation Trends`} style={{ marginBottom: '20px' }}>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <BarChart
+                      data={recommendationTrends.map(item => ({
+                        name: new Date(item.period).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+                        strongBuy: item.strongBuy,
+                        buy: item.buy,
+                        hold: item.hold,
+                        sell: item.sell,
+                        strongSell: item.strongSell,
+                      }))}
+                      margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Legend />
+                      <Bar dataKey="strongBuy" stackId="a" fill="#00C49F" />
+                      <Bar dataKey="buy" stackId="a" fill="#0088FE" />
+                      <Bar dataKey="hold" stackId="a" fill="#FFBB28" />
+                      <Bar dataKey="sell" stackId="a" fill="#FF8042" />
+                      <Bar dataKey="strongSell" stackId="a" fill="#AA336A" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </Card>
+              </Col>
+            </Row>
+          )}
+
+          {companyInfo && (
+            <Row gutter={24}>
+              <Col span={24}>
+                <Card
+                  title={companyInfo.name}
+                  style={{ marginBottom: '20px' }}
+                  cover={
+                    <img
+                      alt={`${companyInfo.name} logo`}
+                      src={companyInfo.logo}
+                      style={{ maxHeight: '150px', objectFit: 'contain', padding: '20px' }}
+                    />
+                  }
+                >
+                  <Meta
+                    description={(
+                      <div>
+                        <p><strong>Country:</strong> {companyInfo.country}</p>
+                        <p><strong>Currency:</strong> {companyInfo.currency}</p>
+                        <p><strong>Exchange:</strong> {companyInfo.exchange}</p>
+                        <p><strong>Industry:</strong> {companyInfo.finnhubIndustry}</p>
+                        <p><strong>IPO Date:</strong> {companyInfo.ipo}</p>
+                        <p><strong>Market Capitalization:</strong> ${parseInt(companyInfo.marketCapitalization).toLocaleString()}</p>
+                        <p><strong>Outstanding Shares:</strong> {companyInfo.shareOutstanding}</p>
+                        <p><strong>Price to Earnings (P/E) Ratio:</strong> {basicFinancials.peBasicExclExtraTTM || 'N/A'}</p>
+                        <p><strong>52-Week High:</strong> ${basicFinancials['52WeekHigh'] || 'N/A'}</p>
+                        <p><strong>52-Week Low:</strong> ${basicFinancials['52WeekLow'] || 'N/A'}</p>
+                        <p><strong>Dividend Yield:</strong> {basicFinancials.dividendYieldIndicatedAnnual || 'N/A'}</p>
+                        <p><strong>Beta:</strong> {basicFinancials.beta || 'N/A'}</p>
+                        <p><strong>Ticker:</strong> {companyInfo.ticker}</p>
+                        <p><strong>Phone:</strong> {companyInfo.phone}</p>
+                        <p><strong>Website:</strong> <a href={companyInfo.weburl} target="_blank" rel="noopener noreferrer">{companyInfo.weburl}</a></p>
+                      </div>
+                    )}
+                  />
+                </Card>
+              </Col>
+            </Row>
+          )}
+        </>
+      )}
+
+      <Modal
+        title="Buy Stocks"
+        visible={isBuyModalVisible}
+        onOk={handleBuyModalOk}
+        onCancel={handleModalCancel}
+      >
+        <p>Current Price: ${currentPrice?.toFixed(2)}</p>
+        <p>Enter the number of shares you want to buy:</p>
+        <InputNumber
+          min={1}
+          defaultValue={1}
+          onChange={handleSharesChange}
+        />
+        <p>Total Price: ${(shares * currentPrice).toFixed(2)}</p>
+      </Modal>
+
+      <Modal
+        title="Sell Stocks"
+        visible={isModalVisible}
+        onOk={handleSellModalOk}
+        onCancel={handleModalCancel}
+      >
+        <p>Current Price: ${currentPrice?.toFixed(2)}</p>
+        <p>Enter the number of shares you want to Sell:</p>
+        <InputNumber
+          min={1}
+          defaultValue={1}
+          onChange={handleSharesChange}
+        />
+        <p>Total Price: ${(shares * currentPrice).toFixed(2)}</p>
+      </Modal>
+    </div>
   );
 };
 
