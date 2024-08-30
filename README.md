@@ -38,7 +38,9 @@ A full-featured finance dashboard providing users with real-time financial data,
      ```
    - The backend will run on port 3000 by default.
 
-3. **Frontend Setup**:
+3. **Frontend Setup**:  
+   - Provide your **FINNHUB_API_KEY** and **ALPHA_VANTAGE_API_KEY** in `frontend/src/config.js`.
+  
    - Navigate to the `/frontend` directory:
      ```bash
      cd frontend
@@ -47,14 +49,13 @@ A full-featured finance dashboard providing users with real-time financial data,
      ```bash
      npm install
      ```
-   - Provide your **FINNHUB_API_KEY** and **ALPHA_VANTAGE_API_KEY** in `frontend/src/config.js`.
    - Start the frontend:
      ```bash
      npm start
      ```
    - The frontend will run on port 3002 by default.
 
-4. **API Keys**:
+5. **API Keys**:
    - Request your own API keys for fetching real market data:
      - **Finnhub API**: [https://finnhub.io/dashboard](https://finnhub.io/dashboard)
      - **Alpha Vantage API**: [https://www.alphavantage.co/support/#api-key](https://www.alphavantage.co/support/#api-key)
