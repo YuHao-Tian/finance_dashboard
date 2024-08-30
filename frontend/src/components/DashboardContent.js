@@ -5,6 +5,7 @@ import StockHoldingChart from './Charts/StockHoldingChart.js';
 import PortfolioDistribution from './Charts/PortfolioDistribution.js';
 import TransactionTable from './TransactionTable.js';
 import axios from 'axios';
+import config  from '../config.js';
 
 const DashboardContent = () => {
   const [userData, setUserData] = useState({
@@ -27,7 +28,7 @@ const DashboardContent = () => {
               params: {
                 function: 'GLOBAL_QUOTE',
                 symbol: holding.stock_name,
-                apikey: 'OQUR3JNFQT4HXQL3', // Replace with your actual API key
+                apikey: config.ALPHA_VANTAGE_API_KEY, // Replace with your actual API key
               },
             });
     
