@@ -47,6 +47,7 @@ A full-featured finance dashboard providing users with real-time financial data,
      ```bash
      npm install
      ```
+   - Provide your **FINNHUB_API_KEY** and **ALPHA_VANTAGE_API_KEY** in `frontend/src/config.js`.
    - Start the frontend:
      ```bash
      npm start
@@ -57,6 +58,6 @@ A full-featured finance dashboard providing users with real-time financial data,
    - Request your own API keys for fetching real market data:
      - **Finnhub API**: [https://finnhub.io/dashboard](https://finnhub.io/dashboard)
      - **Alpha Vantage API**: [https://www.alphavantage.co/support/#api-key](https://www.alphavantage.co/support/#api-key)
-   - Add these keys to your environment variables to enable real-time financial data fetching.
+   - Add these keys to your `frontend/src/config.js` file to enable real-time financial data fetching.
 
 Now you’re ready to start using the Finance Dashboard! Simply access the frontend via `http://localhost:3002/login` after starting both the backend and frontend.
