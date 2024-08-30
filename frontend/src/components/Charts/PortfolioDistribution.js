@@ -4,17 +4,17 @@ import { Card } from 'antd';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import { getUserShareholding } from '../../services/api.js';
 import axios from 'axios';
+import config  from '../../config.js';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AA336A', '#AA33AA'];
 
-const FINNHUB_API_KEY = 'cr5un8hr01qgfrnluivgcr5un8hr01qgfrnluj00'; // Replace with your actual API key
 
 const getCurrentPrice = async (symbol) => {
   try {
     const response = await axios.get(`https://finnhub.io/api/v1/quote`, {
       params: {
         symbol: symbol,
-        token: FINNHUB_API_KEY,
+        token: config.FINNHUB_API_KEY,
       },
     });
     return response.data.c; // Return current price
