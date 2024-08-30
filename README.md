@@ -10,6 +10,6 @@ The backend end part is started by running node app.js, and it is running on por
   
 The front end part is started by running npm start, and it is running on port 3002.
 
-You have request your own Finnhub api and Apache Vantage vpi for fetching real market data.  
+You have to request your own Finnhub api and Apache Vantage vpi for fetching real market data.  
 For Finnhub api: https://finnhub.io/dashboard  
 For Apache Vantage vpi: https://www.alphavantage.co/support/#api-key  
