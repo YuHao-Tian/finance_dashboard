@@ -4,6 +4,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Chart from 'chart.js/auto';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import config  from '../config.js';
+
 
 const { Meta } = Card;
 
@@ -31,17 +33,15 @@ const Dashboard = () => {
     try {
       const response = await axios.get('https://finnhub.io/api/v1/news', {
         params: {
-          category: 'general', // 或 'company' 用于公司特定新闻
-          token: 'cr5un8hr01qgfrnluivgcr5un8hr01qgfrnluj00',
+          category: 'general',
+          token: config.FINNHUB_API_KEY, // Use API key from config
         },
       });
   
       const allArticles = response.data;
   
-      // Filter out articles from Market Watch based on the URL
       const filteredArticles = allArticles.filter(article => !article.url.includes('marketwatch.com'));
   
-      // Limit the number of articles displayed
       setNews(filteredArticles.slice(0, 6)); // 显示前6篇过滤后的新闻
     } catch (error) {
       console.error('Error fetching stock news:', error);
@@ -59,7 +59,7 @@ const Dashboard = () => {
         params: {
           symbol: symbol,
           metric: 'all',
-          token: 'cr5un8hr01qgfrnluivgcr5un8hr01qgfrnluj00', // Replace with your actual Finnhub API key
+          token: config.FINNHUB_API_KEY, // Use API key from config
         },
       });
       return response.data.metric || {}; // Safely return the metric object
@@ -81,7 +81,7 @@ const Dashboard = () => {
             function: 'TIME_SERIES_INTRADAY',
             symbol: symbol,
             interval: '5min',
-            apikey: '88USZD5OS33DORNO',
+            apikey: config.ALPHA_VANTAGE_API_KEY, // Use API key from config
           },
         }
       );
@@ -120,7 +120,7 @@ const Dashboard = () => {
         {
           params: {
             symbol: symbol,
-            token: 'cr5un8hr01qgfrnluivgcr5un8hr01qgfrnluj00',
+            token: config.FINNHUB_API_KEY, // Use API key from config
           },
         }
       );
@@ -135,7 +135,7 @@ const Dashboard = () => {
         {
           params: {
             symbol: symbol,
-            token: 'cr5un8hr01qgfrnluivgcr5un8hr01qgfrnluj00',
+            token: config.FINNHUB_API_KEY, // Use API key from config
           },
         }
       );
