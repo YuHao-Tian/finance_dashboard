@@ -12,4 +12,4 @@ The front end part is started by running npm start, and it is running on port 30
 
 You have to request your own Finnhub api and Apache Vantage vpi for fetching real market data.  
 For Finnhub api: https://finnhub.io/dashboard  
-For Apache Vantage vpi: https://www.alphavantage.co/support/#api-key  
+For Apache Vantage api: https://www.alphavantage.co/support/#api-key  
