@@ -1,4 +1,3 @@
-// src/components/TransactionTable.js
 import React, { useEffect, useState } from 'react';
 import { Table, Card } from 'antd';
 import { getStockTransactions } from '../services/api.js';
@@ -13,7 +12,13 @@ const TransactionTable = () => {
       setLoading(true);
       try {
         const response = await getStockTransactions();
-        setTransactions(response.data); // Store transactions in state
+        
+        // Sort transactions by transaction_time in descending order
+        const sortedTransactions = response.data.sort((a, b) => 
+          new Date(b.transaction_time) - new Date(a.transaction_time)
+        );
+
+        setTransactions(sortedTransactions); // Store sorted transactions in state
       } catch (error) {
         console.error('Error fetching transactions:', error);
       } finally {
@@ -53,10 +58,10 @@ const TransactionTable = () => {
       key: 'transaction_type',
     },
     {
-      title: 'Transaction Time',  // Update the title to reflect what this column represents
-      dataIndex: 'transaction_time',  // Match this with the database field name
+      title: 'Transaction Time',
+      dataIndex: 'transaction_time',
       key: 'transaction_time',
-      render: (text) => moment(text).format('MMMM Do YYYY, h:mm:ss a'),  // Correctly format the time
+      render: (text) => moment(text).format('MMMM Do YYYY, h:mm:ss a'),
     },
   ];
 
