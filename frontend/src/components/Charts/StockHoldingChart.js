@@ -4,8 +4,8 @@ import { Card, List, Avatar } from 'antd';
 import { getUserShareholding } from '../../services/api.js';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import config  from '../../config.js';
 
-const FINNHUB_API_KEY = 'cr5un8hr01qgfrnluivgcr5un8hr01qgfrnluj00'; // Replace with your actual API key
 
 const getCompanyLogo = async (symbol) => {
   try {
@@ -14,7 +14,7 @@ const getCompanyLogo = async (symbol) => {
       {
         params: {
           symbol: symbol,
-          token: FINNHUB_API_KEY,
+          token: config.FINNHUB_API_KEY,
         },
       }
     );
@@ -33,7 +33,7 @@ const getPriceChange = async (symbol) => {
       {
         params: {
           symbol: symbol,
-          token: FINNHUB_API_KEY,
+          token: config.FINNHUB_API_KEY,
         },
       }
     );
