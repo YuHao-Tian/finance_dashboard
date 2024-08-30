@@ -17,13 +17,46 @@ A full-featured finance dashboard providing users with real-time financial data,
 - **APIs**: Finnhub, Alpha Vantage Stock API
 - **Database**: MySQL
 - **Front-End**: React.js, Ant Design (Antd), Material-UI
-  
-To start this project, you have to cd into /backend and /frontend and run npm start firstly.  
-  
-The backend end part is started by running node app.js, and it is running on port 3000(by default).
-  
-The front end part is started by running npm start, and it is running on port 3002.
 
-You have to request your own Finnhub api and Apache Vantage vpi for fetching real market data.  
-For Finnhub api: https://finnhub.io/dashboard  
-For Apache Vantage api: https://www.alphavantage.co/support/#api-key  
+## How to Start
+
+1. **Set Up the Database**:
+   - Use the `finance.sql` file to create the `finance` database and the necessary tables: `user`, `stock_transaction`, and `shareholding`.
+
+2. **Backend Setup**:
+   - Navigate to the `/backend` directory:
+     ```bash
+     cd backend
+     ```
+   - Install dependencies:
+     ```bash
+     npm install
+     ```
+   - Start the backend server:
+     ```bash
+     node app.js
+     ```
+   - The backend will run on port 3000 by default.
+
+3. **Frontend Setup**:
+   - Navigate to the `/frontend` directory:
+     ```bash
+     cd frontend
+     ```
+   - Install dependencies:
+     ```bash
+     npm install
+     ```
+   - Start the frontend:
+     ```bash
+     npm start
+     ```
+   - The frontend will run on port 3002 by default.
+
+4. **API Keys**:
+   - Request your own API keys for fetching real market data:
+     - **Finnhub API**: [https://finnhub.io/dashboard](https://finnhub.io/dashboard)
+     - **Alpha Vantage API**: [https://www.alphavantage.co/support/#api-key](https://www.alphavantage.co/support/#api-key)
+   - Add these keys to your environment variables to enable real-time financial data fetching.
+
+Now you’re ready to start using the Finance Dashboard! Simply access the frontend via `http://localhost:3002` after starting both the backend and frontend.
