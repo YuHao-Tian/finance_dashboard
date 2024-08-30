@@ -59,4 +59,4 @@ A full-featured finance dashboard providing users with real-time financial data,
      - **Alpha Vantage API**: [https://www.alphavantage.co/support/#api-key](https://www.alphavantage.co/support/#api-key)
    - Add these keys to your environment variables to enable real-time financial data fetching.
 
-Now you’re ready to start using the Finance Dashboard! Simply access the frontend via `http://localhost:3002` after starting both the backend and frontend.
+Now you’re ready to start using the Finance Dashboard! Simply access the frontend via `http://localhost:3002/login` after starting both the backend and frontend.
